@@ -2,42 +2,27 @@ import React from 'react';
 import { Button, Form } from 'react-bootstrap';
 
 class CreateCard extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            cardName: "",
-            toDoList: []
-        };
+    state = {
+        input: ""
     }
-    handleChange(event) {
-        this.setState({
-            cardName: event.target.value
-        },
-            () => {
-                console.log(this.state.cardName);
-            });
-    };
-    handleClick(event) {
-        this.setState({
-            toDoList: [
-                ...this.state.toDoList,
-                this.state.cardName
-            ],
-            cardName : ""
+
+    handleInput = (event) => {
+        event.persist() //need explaination on this
+        this.setState( {
+            input: event.target.value
         })
-        console.log(this.state.toDoList);
+        console.log(this.state)
     }
 
     render() {
         return (
-            <div>
-                <Form>
-                    <Form.Control type="text" name="cardName" placeholder="First name" value={this.state.cardName} onChange={e => this.handleChange(e)} />
-                    <Button variant="outline-primary" onClick={e => this.handleClick(e)}> Submit</Button>
-                </Form>
-
-            </div>
+            <form onSubmit = {this.handleNewCard} className="new-card-form">
+                <h4> Create Card</h4>
+                <input onChange = {this.handleInput} className="new-card-input" type="text" value={this.state.input}/>
+                <input className = "new-card-input" type="submit" value="Create" />
+            </form>
         )
     }
 }
+
 export default CreateCard;
