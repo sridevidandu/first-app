@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Form } from 'react-bootstrap';
+//import { Button, Form } from 'react-bootstrap';
 
 class CreateCard extends React.Component {
     state = {
@@ -12,6 +12,14 @@ class CreateCard extends React.Component {
             input: event.target.value
         })
         console.log(this.state)
+    }
+
+    handleNewCard = (event) => {
+        event.preventDefault()
+        this.props.createNewCard(this.state.input)
+        this.setState({
+            input: ""
+        })
     }
 
     render() {
